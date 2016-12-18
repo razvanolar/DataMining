@@ -1,5 +1,6 @@
 package sample.components;
 
+import javafx.application.Platform;
 import sample.components.charts.ChartsController;
 import sample.components.data_set_view.DataSetController;
 import sample.components.logs_view.RuleController;
@@ -57,14 +58,18 @@ public class MainController {
   }
 
   public void applyClustering(String tabName, int clustersNumber, Distances distanceFormula, boolean[] mask) {
-    try {
-      ClusteringAlg clusteringAlg = new ClusteringAlg();
-      List<Cluster> clusters = clusteringAlg.kmean(repo.getPartialRawEntries(mask), clustersNumber, (float) 0.3);
-      toolbarController.chageToChartView();
-      chartsController.addNewTab(tabName, repo.getClusterResultEntries(clusters), mask);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    mainView.mask("Loading...");
+    Platform.runLater(() -> {
+      try {
+        ClusteringAlg clusteringAlg = new ClusteringAlg();
+        List<Cluster> clusters = clusteringAlg.kmean(repo.getPartialRawEntries(mask), clustersNumber, (float) 0.3);
+        toolbarController.chageToChartView();
+        chartsController.addNewTab(tabName, clusters, repo.getClusterResultEntries(clusters), mask);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      mainView.unmask();
+    });
   }
 
   public Repository getRepo() {

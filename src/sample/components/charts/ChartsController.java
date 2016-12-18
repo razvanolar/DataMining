@@ -24,8 +24,8 @@ public class ChartsController implements Controller<ChartsController.IChartsView
     this.view = view;
   }
 
-  public void addNewTab(String name, List<ClusterResultEntry> resultEntries, boolean[] mask) {
-    ClustersController clustersController = new ClustersController(getDimensions(mask), resultEntries);
+  public void addNewTab(String name, List<Cluster> clusters, List<ClusterResultEntry> resultEntries, boolean[] mask) {
+    ClustersController clustersController = new ClustersController(getDimensions(mask), resultEntries, clusters);
     ClustersController.IClustersView iClustersView = new ClustersView();
     clustersController.bind(iClustersView);
     Tab tab = new Tab(name);

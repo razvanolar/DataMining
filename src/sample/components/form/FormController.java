@@ -1,10 +1,7 @@
 package sample.components.form;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 import sample.components.MainController;
-import sample.models.Entry;
 import sample.models.FormattedEntry;
 import sample.utils.enums.Activities;
 import sample.utils.interfaces.Controller;
@@ -12,7 +9,6 @@ import sample.utils.interfaces.View;
 
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 public class FormController implements Controller<FormController.IFormView> {
 
@@ -55,9 +51,7 @@ public class FormController implements Controller<FormController.IFormView> {
       }
     });
     actionButton.setDisable(true);
-    view.getBirthDatePicker().valueProperty().addListener((observable, oldValue, newValue) -> {
-      actionButton.setDisable(newValue == null);
-    });
+    view.getBirthDatePicker().valueProperty().addListener((observable, oldValue, newValue) -> actionButton.setDisable(newValue == null));
     view.getBirthDatePicker().setValue(LocalDate.of(1996, 1, 1));
   }
 }
