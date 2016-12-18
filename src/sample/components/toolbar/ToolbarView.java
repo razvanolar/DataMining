@@ -14,6 +14,7 @@ public class ToolbarView implements ToolbarController.IToolbarView {
   private ToggleButton dataSetButton;
   private ToggleButton chartsButton;
   private ToggleButton logButton;
+  private Button clusteringButton;
 
   public ToolbarView() {
     initGUI();
@@ -22,11 +23,13 @@ public class ToolbarView implements ToolbarController.IToolbarView {
   @Override
   public void initGUI() {
     formButton = new Button("Form");
+    clusteringButton = new Button("Cluster");
     dataSetButton = new ToggleButton("Data Set");
     chartsButton = new ToggleButton("Charts");
     logButton = new ToggleButton("Logs");
     toolBar = new ToolBar(
             formButton,
+            clusteringButton,
             new FillToolItem(),
             dataSetButton,
             chartsButton,
@@ -40,6 +43,10 @@ public class ToolbarView implements ToolbarController.IToolbarView {
 
   public Button getFormButton() {
     return formButton;
+  }
+
+  public Button getClusteringButton() {
+    return clusteringButton;
   }
 
   public ToggleButton getChartsButton() {

@@ -7,6 +7,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import sample.components.MainController;
+import sample.components.cluster_info_view.ClusterInfoController;
+import sample.components.cluster_info_view.ClusterInfoView;
 import sample.components.form.FormController;
 import sample.components.form.FormView;
 import sample.utils.interfaces.Controller;
@@ -18,6 +20,7 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
 
   public interface IToolbarView extends View {
     Button getFormButton();
+    Button getClusteringButton();
     ToggleButton getChartsButton();
     ToggleButton getDataSetButton();
     ToggleButton getLogButton();
@@ -42,6 +45,8 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     view.getLogButton().selectedProperty().addListener(listener);
 
     view.getFormButton().setOnAction(event -> onFormButtonSelection());
+
+    view.getClusteringButton().setOnAction(event -> onClusterButtonSelection());
   }
 
   private void onFormButtonSelection() {
@@ -52,6 +57,15 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     formController.bind(iFormView);
     dialog.setContent(iFormView.asNode());
     dialog.getOkButton().setText("Find Rule");
+    dialog.show();
+  }
+
+  private void onClusterButtonSelection() {
+    OkCancelDialog dialog = new OkCancelDialog("Clustering Data", StageStyle.UTILITY, Modality.APPLICATION_MODAL,
+            true, true);
+    ClusterInfoController clusterInfoController = new ClusterInfoController();
+    ClusterInfoController.IClusterInfoView iClusterInfoView = new ClusterInfoView();
+    dialog.setContent(iClusterInfoView.asNode());
     dialog.show();
   }
 }

@@ -1,5 +1,6 @@
 package sample.components.edit_attributes_range;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -130,8 +131,12 @@ public class EditAttributesRangeView implements EditAttributesRangeController.IE
             distanceGridPane
     );
 
+    mainContainer.setPadding(new Insets(15));
+
     scrollPane = new ScrollPane(mainContainer);
     scrollPane.prefHeight(400);
+    scrollPane.setMaxHeight(400);
+    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
   }
 
   private GridPane createGridPane() {
