@@ -1,5 +1,7 @@
 package sample.components.form;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 import sample.components.MainController;
 import sample.models.Entry;
@@ -49,8 +51,13 @@ public class FormController implements Controller<FormController.IFormView> {
       if (result == -1) {
         view.getResultLabel().setText("No available value");
       } else {
-        view.getResultLabel().setText(result + "");
+        view.getResultLabel().setText(result + " km");
       }
     });
+    actionButton.setDisable(true);
+    view.getBirthDatePicker().valueProperty().addListener((observable, oldValue, newValue) -> {
+      actionButton.setDisable(newValue == null);
+    });
+    view.getBirthDatePicker().setValue(LocalDate.of(1996, 1, 1));
   }
 }
