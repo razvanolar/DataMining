@@ -59,4 +59,7 @@ INSERT INTO attribute_range (attribute_index, display_name, min, max) VALUES
   (4, 'Doctor', 3, 4),
   (4, 'Policeman', 4, 5),
   (4, 'Engineer', 5, 6),
-  (4, 'Other', 6, 7);
+  (4, 'Other', 6, 7),
+
+  (3, 'Female', NULL, 1),
+  (3, 'Male', 1, NULL );
