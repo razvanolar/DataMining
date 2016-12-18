@@ -6,6 +6,7 @@ import sample.models.FormattedEntry;
 import sample.utils.id3.ID3Utils;
 import sample.utils.interfaces.Controller;
 import sample.utils.interfaces.View;
+import sample.utils.repository.FileUtil;
 import sample.utils.repository.JDBCDao;
 import sample.utils.repository.Repository;
 
@@ -25,7 +26,7 @@ public class DataSetController implements Controller<DataSetController.IDataSetV
 
   private List<Entry> generateEntries() {
     try {
-      Repository repo = new JDBCDao();
+      Repository repo = new FileUtil("D:\\Java Workspace\\DataMiningApp\\src\\sample\\utils\\data\\entries.txt", "D:\\Java Workspace\\DataMiningApp\\src\\sample\\utils\\data\\attribute_range.txt");
       ID3Utils.namesMap = repo.getNamesMap();
       ID3Utils.ATTR_NUMBER = ID3Utils.namesMap.size() - 1;
       ID3Utils.attributeRangeMap = repo.getAttributeRange();

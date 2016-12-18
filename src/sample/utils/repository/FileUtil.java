@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by Cristi on 12/17/2016.
  */
-public class FileUtil implements Repository {
+public class FileUtil extends Repository {
     String entriesPath;
     String attributePath;
 

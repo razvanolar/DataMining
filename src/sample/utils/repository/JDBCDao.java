@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Cristi on 12/17/2016.
  */
-public class JDBCDao implements Repository {
+public class JDBCDao extends Repository {
     private Connection conn;
 
     public JDBCDao() throws Exception {
