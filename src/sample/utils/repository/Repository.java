@@ -13,6 +13,7 @@ public abstract class Repository {
   private List<RawEntry> rawEntries;
   private List<ClusterEntry> clusterEntries;
   private DecisionTree tree;
+  private String rules;
 
   protected void loadData() {
     ID3Utils.namesMap = getNamesMap();
@@ -29,6 +30,7 @@ public abstract class Repository {
     }
     tree = new DecisionTree(formattedEntries);
     tree.run();
+    this.rules = tree.
   }
 
   public void reloadData() {

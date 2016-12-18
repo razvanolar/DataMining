@@ -34,8 +34,8 @@ public class FormView implements FormController.IFormView {
     birthDatePicker = new DatePicker();
     heightSpinner = new Spinner<>(1.35, 2.30, 1.75, 0.01);
     weightSpinner = new Spinner<>(35, 180, 65, 1);
-    masculineSexButton = new RadioButton("Masculine");
-    RadioButton feminineSexButton = new RadioButton("Feminine");
+    masculineSexButton = new RadioButton("Male");
+    RadioButton feminineSexButton = new RadioButton("Female");
     activitiesComboBox = new ComboBox<>();
     oneEffortLevelButton = new RadioButton("1");
     twoEffortLevelButton = new RadioButton("2");
