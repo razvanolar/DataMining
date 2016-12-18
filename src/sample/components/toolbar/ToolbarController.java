@@ -46,8 +46,8 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
 
   private void onFormButtonSelection() {
     OkCancelDialog dialog = new OkCancelDialog("Find Average Distance", StageStyle.UTILITY, Modality.APPLICATION_MODAL,
-            true, 350, 400);
-    FormController formController = new FormController();
+            true, 450, 400);
+    FormController formController = new FormController(dialog.getOkButton());
     FormController.IFormView iFormView = new FormView();
     formController.bind(iFormView);
     dialog.setContent(iFormView.asNode());
