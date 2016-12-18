@@ -13,6 +13,7 @@ public class DecisionTree {
   private List<FormattedEntry> entries;
   private List<TreeNode> path = new ArrayList<>();
   private Node root;
+  private String printPathList = "";
 
   public DecisionTree(List<FormattedEntry> entries) {
     this.entries = entries;
@@ -48,28 +49,28 @@ public class DecisionTree {
   }
 
   //DFS
-  private void print(TreeNode node) {
+  public void generateIfClauses(TreeNode node) {
     if (node == null) {
-      printPath();
+      addIfClause();
       return;
     }
 
     if (node.getChildren() == null || node.getChildren().isEmpty()) {
       path.add(node);
-      printPath();
+      addIfClause();
       path.remove(node);
       return;
     }
     path.add(node);
     if (node.getChildren() != null) {
       for (TreeNode treeNode : node.getChildren()) {
-          print(treeNode);
+          generateIfClauses(treeNode);
       }
     }
     path.remove(node);
   }
 
-  private void printPath() {
+  private void addIfClause() {
     String toPrint = "if (";
     for (int i=0; i<path.size(); i++) {
       TreeNode node = path.get(i);
@@ -84,7 +85,7 @@ public class DecisionTree {
       }
     }
     toPrint += "" + path.get(path.size() - 1).getResult();
-    System.out.println(toPrint);
+    printPathList += toPrint + "\n";
   }
 
   public Node getRoot() {
@@ -103,7 +104,7 @@ public class DecisionTree {
       tree.run();
       System.out.println(System.currentTimeMillis() - time);
       time = System.currentTimeMillis();
-      tree.print(tree.getRoot());
+      tree.generateIfClauses(tree.getRoot());
       System.out.println(System.currentTimeMillis() - time);
       System.out.println("Result: " + tree.find(new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
     } catch (Exception e) {
@@ -130,5 +131,11 @@ public class DecisionTree {
       }
     }
     return -1f;
+  }
+
+  public String getPrintPathList() {
+    printPathList = "";
+    generateIfClauses(root);
+    return printPathList;
   }
 }

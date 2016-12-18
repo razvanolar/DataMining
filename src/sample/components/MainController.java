@@ -2,6 +2,7 @@ package sample.components;
 
 import sample.components.charts.ChartsController;
 import sample.components.data_set_view.DataSetController;
+import sample.components.logs_view.RuleController;
 import sample.components.toolbar.ToolbarController;
 import sample.models.Cluster;
 import sample.utils.clustering.ClusteringAlg;
@@ -24,13 +25,15 @@ public class MainController {
   private DataSetController dataSetController;
   private ToolbarController toolbarController;
   private ChartsController chartsController;
+  private RuleController ruleController;
   private Repository repo;
 
-  public void inject(MainView mainView, DataSetController dataSetController, ToolbarController toolbarController, ChartsController chartsController) {
+  public void inject(MainView mainView, DataSetController dataSetController, ToolbarController toolbarController, ChartsController chartsController, RuleController ruleController) {
     this.mainView = mainView;
     this.dataSetController = dataSetController;
     this.toolbarController = toolbarController;
     this.chartsController = chartsController;
+    this.ruleController = ruleController;
   }
 
   public void setMainContentType(MainContentTypes contentType) {
@@ -46,6 +49,7 @@ public class MainController {
     try {
       repo = repositoryTypes == RepositoryTypes.DATABASE ? new JDBCRepository() : new FileRepository(ENTRIES_PATH, ATTRIBUTES_RANGE_PATH);
       dataSetController.load();
+      ruleController.load();
     } catch (Exception e) {
       e.printStackTrace();
     }

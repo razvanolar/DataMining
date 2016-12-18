@@ -9,8 +9,8 @@ import sample.components.data_set_view.DataSetController;
 import sample.components.data_set_view.DataSetView;
 import sample.components.charts.ChartsController;
 import sample.components.charts.ChartsView;
-import sample.components.logs_view.LogView;
-import sample.components.logs_view.LogsController;
+import sample.components.logs_view.RuleView;
+import sample.components.logs_view.RuleController;
 import sample.components.menu.MenuBarController;
 import sample.components.menu.MenuBarView;
 import sample.components.toolbar.ToolbarController;
@@ -26,7 +26,7 @@ public class MainView implements View {
   private BorderPane mainContainer;
   private DataSetController.IDataSetView iDataSetView;
   private ChartsController.IChartsView iChartsView;
-  private LogsController.ILogView iLogView;
+  private RuleController.IRuleView iRuleView;
 
   public MainView() {
     initGUI();
@@ -38,19 +38,19 @@ public class MainView implements View {
     ToolbarController toolbarController = new ToolbarController();
     DataSetController dataSetController = new DataSetController();
     ChartsController chartsController = new ChartsController();
-    LogsController logsController = new LogsController();
+    RuleController ruleController = new RuleController();
 
     MenuBarController.IMenuBarView iMenuBarView = new MenuBarView();
     ToolbarController.IToolbarView iToolbarView = new ToolbarView();
     iDataSetView = new DataSetView();
     iChartsView = new ChartsView();
-    iLogView = new LogView();
+    iRuleView = new RuleView();
 
     menuBarController.bind(iMenuBarView);
     toolbarController.bind(iToolbarView);
     dataSetController.bind(iDataSetView);
     chartsController.bind(iChartsView);
-    logsController.bind(iLogView);
+    ruleController.bind(iRuleView);
 
     mainContainer = new BorderPane();
     VBox vBox = new VBox();
@@ -70,7 +70,7 @@ public class MainView implements View {
     maskPane = new BorderPane(panel);
     panel.setAlignment(Pos.CENTER);
     maskLabel = new Label("");
-    MainController.getInstance().inject(this, dataSetController, toolbarController, chartsController);
+    MainController.getInstance().inject(this, dataSetController, toolbarController, chartsController, ruleController);
   }
 
   public void mask(String message) {
@@ -90,7 +90,7 @@ public class MainView implements View {
     else if (contentType == MainContentTypes.FORM)
       mainContainer.setCenter(iChartsView.asNode());
     else
-      mainContainer.setCenter(iLogView.asNode());
+      mainContainer.setCenter(iRuleView.asNode());
   }
 
   @Override

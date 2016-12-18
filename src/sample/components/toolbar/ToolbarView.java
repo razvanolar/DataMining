@@ -26,7 +26,7 @@ public class ToolbarView implements ToolbarController.IToolbarView {
     clusteringButton = new Button("Cluster");
     dataSetButton = new ToggleButton("Data Set");
     chartsButton = new ToggleButton("Charts");
-    logButton = new ToggleButton("Logs");
+    logButton = new ToggleButton("Rules");
     toolBar = new ToolBar(
             formButton,
             clusteringButton,
