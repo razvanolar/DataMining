@@ -11,14 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Cristi on 12/17/2016.
- */
-public class FileUtil extends Repository {
+public class FileRepository extends Repository {
     String entriesPath;
     String attributePath;
 
-    public FileUtil(String entriesPath, String attributePath) {
+    public FileRepository(String entriesPath, String attributePath) {
         this.entriesPath = entriesPath;
         this.attributePath = attributePath;
         loadData();

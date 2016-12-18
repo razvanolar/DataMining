@@ -30,7 +30,7 @@ public class ClusterInfoView implements ClusterInfoController.IClusterInfoView {
   public void initGUI() {
     gridPane = new GridPane();
     tabNameTextField = new TextField();
-    clusterNumberSpinner = new Spinner<>();
+    clusterNumberSpinner = new Spinner<>(2, 1000, 5, 1);
     distancesComboBox = new ComboBox<>();
     ageCheckBox = new CheckBox("Age");
     heightCheckBox = new CheckBox("Height");
@@ -64,6 +64,50 @@ public class ClusterInfoView implements ClusterInfoController.IClusterInfoView {
 
     distancesComboBox.getItems().addAll(Distances.values());
     distancesComboBox.setValue(Distances.EUCLIDEAN);
+  }
+
+  public TextField getTabNameTextField() {
+    return tabNameTextField;
+  }
+
+  public Spinner<Number> getClusterNumberSpinner() {
+    return clusterNumberSpinner;
+  }
+
+  public ComboBox<Distances> getDistancesComboBox() {
+    return distancesComboBox;
+  }
+
+  public CheckBox getAgeCheckBox() {
+    return ageCheckBox;
+  }
+
+  public CheckBox getHeightCheckBox() {
+    return heightCheckBox;
+  }
+
+  public CheckBox getWeightCheckBox() {
+    return weightCheckBox;
+  }
+
+  public CheckBox getSexCheckBox() {
+    return sexCheckBox;
+  }
+
+  public CheckBox getActivityCheckBox() {
+    return activityCheckBox;
+  }
+
+  public CheckBox getEffortCheckBox() {
+    return effortCheckBox;
+  }
+
+  public CheckBox getSpeedCheckBox() {
+    return speedCheckBox;
+  }
+
+  public CheckBox getDistanceCheckBox() {
+    return distanceCheckBox;
   }
 
   @Override

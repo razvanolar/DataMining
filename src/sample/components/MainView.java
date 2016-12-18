@@ -24,7 +24,6 @@ public class MainView implements View {
   private LogsController.ILogView iLogView;
 
   public MainView() {
-    MainController.getInstance().setMainView(this);
     initGUI();
   }
 
@@ -60,6 +59,8 @@ public class MainView implements View {
     footer.setPrefSize(0, 20);
     footer.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
     mainContainer.setBottom(footer);
+
+    MainController.getInstance().inject(this, dataSetController);
   }
 
   public void setCenterContent(MainContentTypes contentType) {

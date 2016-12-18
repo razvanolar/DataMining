@@ -1,17 +1,13 @@
 package sample.utils.id3;
 
 import sample.models.*;
-import sample.utils.repository.FileUtil;
-import sample.utils.repository.JDBCDao;
+import sample.utils.repository.JDBCRepository;
 import sample.utils.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-/**
- * Created by razvanolar on 15.12.2016
- */
 public class DecisionTree {
   private Repository repo;
   private List<FormattedEntry> entries;
@@ -98,8 +94,8 @@ public class DecisionTree {
   public static void main(String[] args) {
     try {
       long time = System.currentTimeMillis();
-//      Repository repo = new FileUtil("D:\\Java Workspace\\DecisionTree\\src\\data\\entries.txt", "D:\\Java Workspace\\DecisionTree\\src\\data\\attribute_range.txt");
-      Repository repo = new JDBCDao();
+//      Repository repo = new FileRepository("D:\\Java Workspace\\DecisionTree\\src\\data\\entries.txt", "D:\\Java Workspace\\DecisionTree\\src\\data\\attribute_range.txt");
+      Repository repo = new JDBCRepository();
       System.out.println(System.currentTimeMillis() - time);
       time = System.currentTimeMillis();
       DecisionTree tree = new DecisionTree(repo.getFormattedEntries());
@@ -109,13 +105,13 @@ public class DecisionTree {
       time = System.currentTimeMillis();
       tree.print(tree.getRoot());
       System.out.println(System.currentTimeMillis() - time);
-      System.out.println("Result: " + tree.find(tree.getRoot(), new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
+      System.out.println("Result: " + tree.find(new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private Float find(TreeNode root, FormattedEntry formattedEntry) {
+  public Float find(FormattedEntry formattedEntry) {
     TreeNode node = root;
     boolean childFound = true;
     while (node != null && node.getChildren() != null && childFound) {  // node = Node

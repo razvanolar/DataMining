@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.components.MainController;
 import sample.components.MainView;
 
 public class ApplicationView extends Application {
@@ -21,6 +22,7 @@ public class ApplicationView extends Application {
     primaryStage.setScene(scene);
     primaryStage.setMaximized(true);
     primaryStage.show();
+    MainController.getInstance().load();
   }
 
 

@@ -63,9 +63,14 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
   private void onClusterButtonSelection() {
     OkCancelDialog dialog = new OkCancelDialog("Clustering Data", StageStyle.UTILITY, Modality.APPLICATION_MODAL,
             true, true);
-    ClusterInfoController clusterInfoController = new ClusterInfoController();
+    ClusterInfoController clusterInfoController = new ClusterInfoController(dialog.getOkButton());
     ClusterInfoController.IClusterInfoView iClusterInfoView = new ClusterInfoView();
+    clusterInfoController.bind(iClusterInfoView);
     dialog.setContent(iClusterInfoView.asNode());
+    dialog.getOkButton().setOnAction(event -> {
+
+      dialog.close();
+    });
     dialog.show();
   }
 }

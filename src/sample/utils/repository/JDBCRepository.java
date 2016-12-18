@@ -11,10 +11,10 @@ import java.util.Map;
 /**
  * Created by Cristi on 12/17/2016.
  */
-public class JDBCDao extends Repository {
+public class JDBCRepository extends Repository {
     private Connection conn;
 
-    public JDBCDao() throws Exception {
+    public JDBCRepository() throws Exception {
         this.conn = JDBCUtil.getInstance().getConnection();
         loadData();
     }

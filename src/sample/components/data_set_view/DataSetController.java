@@ -1,17 +1,10 @@
 package sample.components.data_set_view;
 
 import javafx.scene.control.TableView;
+import sample.components.MainController;
 import sample.models.Entry;
-import sample.models.FormattedEntry;
-import sample.utils.id3.ID3Utils;
 import sample.utils.interfaces.Controller;
 import sample.utils.interfaces.View;
-import sample.utils.repository.FileUtil;
-import sample.utils.repository.JDBCDao;
-import sample.utils.repository.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DataSetController implements Controller<DataSetController.IDataSetView> {
 
@@ -19,27 +12,15 @@ public class DataSetController implements Controller<DataSetController.IDataSetV
     TableView<Entry> getEntryTableView();
   }
 
+  private IDataSetView view;
+
   @Override
   public void bind(IDataSetView view) {
-    view.getEntryTableView().getItems().addAll(generateEntries());
+    this.view = view;
   }
 
-  private List<Entry> generateEntries() {
-    try {
-//      Repository repo = new FileUtil("D:\\Java Workspace\\DataMiningApp\\src\\sample\\utils\\data\\entries.txt", "D:\\Java Workspace\\DataMiningApp\\src\\sample\\utils\\data\\attribute_range.txt");
-      Repository repo = new JDBCDao();
-      ID3Utils.namesMap = repo.getNamesMap();
-      ID3Utils.ATTR_NUMBER = ID3Utils.namesMap.size() - 1;
-      ID3Utils.attributeRangeMap = repo.getAttributeRange();
-      List<String> strings = repo.getAllValuesAsStringList();
-      List<Entry> entries = new ArrayList<>();
-      for (String string : strings) {
-        entries.add(new FormattedEntry(string));
-//        entries.add(new RawEntry(string));
-      }
-      return entries;
-    } catch (Exception e) {
-      return new ArrayList<>();
-    }
+  public void load() {
+    view.getEntryTableView().getItems().clear();
+    view.getEntryTableView().getItems().addAll(MainController.getInstance().getRepo().getRawEntries());
   }
 }
