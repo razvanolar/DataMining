@@ -46,6 +46,32 @@ public class ClusterInfoController implements Controller<ClusterInfoController.I
     view.getDistanceCheckBox().selectedProperty().addListener(listener);
   }
 
+  public String getTabName() {
+    return view.getTabNameTextField().getText();
+  }
+
+  public int getClustersNumber() {
+    return view.getClusterNumberSpinner().getValue().intValue();
+  }
+
+  public Distances getFormula() {
+    return view.getDistancesComboBox().getValue();
+  }
+
+  public boolean[] getMask() {
+    //TODO use a generic way to determine the number of available attributes
+    boolean[] mask = new boolean[8];
+    mask[0] = view.getAgeCheckBox().isSelected();
+    mask[1] = view.getHeightCheckBox().isSelected();
+    mask[2] = view.getWeightCheckBox().isSelected();
+    mask[3] = view.getSexCheckBox().isSelected();
+    mask[4] = view.getActivityCheckBox().isSelected();
+    mask[5] = view.getEffortCheckBox().isSelected();
+    mask[6] = view.getSpeedCheckBox().isSelected();
+    mask[7] = view.getDistanceCheckBox().isSelected();
+    return mask;
+  }
+
   public boolean isValid() {
     return view.getTabNameTextField().getText() != null &&
             !view.getTabNameTextField().getText().isEmpty() &&

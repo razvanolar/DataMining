@@ -1,6 +1,8 @@
 package sample.components;
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import sample.components.data_set_view.DataSetController;
@@ -18,6 +20,9 @@ import sample.utils.enums.MainContentTypes;
 
 public class MainView implements View {
 
+  private StackPane stackPane;
+  private BorderPane maskPane;
+  private Label maskLabel;
   private BorderPane mainContainer;
   private DataSetController.IDataSetView iDataSetView;
   private ChartsController.IChartsView iChartsView;
@@ -60,7 +65,23 @@ public class MainView implements View {
     footer.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
     mainContainer.setBottom(footer);
 
-    MainController.getInstance().inject(this, dataSetController);
+    stackPane = new StackPane(mainContainer);
+    GridPane panel = new GridPane();
+    maskPane = new BorderPane(panel);
+    panel.setAlignment(Pos.CENTER);
+    maskLabel = new Label("");
+    MainController.getInstance().inject(this, dataSetController, toolbarController, chartsController);
+  }
+
+  public void mask(String message) {
+    maskLabel.setText(message);
+    if (!stackPane.getChildren().contains(maskPane))
+      stackPane.getChildren().add(maskPane);
+  }
+
+  public void unmask() {
+    if (stackPane.getChildren().contains(maskPane))
+      stackPane.getChildren().remove(maskPane);
   }
 
   public void setCenterContent(MainContentTypes contentType) {
@@ -74,6 +95,6 @@ public class MainView implements View {
 
   @Override
   public Node asNode() {
-    return mainContainer;
+    return stackPane;
   }
 }

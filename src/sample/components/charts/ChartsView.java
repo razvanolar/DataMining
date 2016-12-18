@@ -19,6 +19,10 @@ public class ChartsView implements ChartsController.IChartsView {
     mainContainer = new BorderPane(tabPane);
   }
 
+  public TabPane getTabPane() {
+    return tabPane;
+  }
+
   @Override
   public Node asNode() {
     return mainContainer;
