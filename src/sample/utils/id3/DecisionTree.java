@@ -15,6 +15,7 @@ public class DecisionTree {
   private Repository repo;
   private List<FormattedEntry> entries;
   private List<TreeNode> path = new ArrayList<>();
+  private Node root;
 
   public DecisionTree(Repository repo) {
     this.repo = repo;
@@ -32,12 +33,12 @@ public class DecisionTree {
     }
   }
 
-  public Node run() {
+  public void run() {
     double responseEntropy = ID3Utils.calculateResultEntropy(entries);
     boolean[] valid_attrs = ID3Utils.createBoolArray();
     Node root = ID3Utils.getBestNode(valid_attrs, entries, null, responseEntropy);
     generateTree(root, responseEntropy);
-    return root;
+    this.root = root;
   }
 
   public void generateTree(Node root, double entropy) {
@@ -101,6 +102,10 @@ public class DecisionTree {
     System.out.println(toPrint);
   }
 
+  public Node getRoot() {
+    return root;
+  }
+
   public static void main(String[] args) {
     try {
       long time = System.currentTimeMillis();
@@ -108,12 +113,12 @@ public class DecisionTree {
       Repository repo = new JDBCDao();
 
       DecisionTree tree = new DecisionTree(repo);
-      Node root = tree.run();
+      tree.run();
       System.out.println(System.currentTimeMillis() - time);
       time = System.currentTimeMillis();
-      tree.print(root);
+      tree.print(tree.getRoot());
       System.out.println(System.currentTimeMillis() - time);
-      System.out.println("Result: " + tree.find(root, new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
+      System.out.println("Result: " + tree.find(tree.getRoot(), new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
     } catch (Exception e) {
       e.printStackTrace();
     }
