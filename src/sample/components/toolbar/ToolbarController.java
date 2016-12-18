@@ -26,8 +26,11 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     ToggleButton getLogButton();
   }
 
+  private IToolbarView view;
+
   @Override
   public void bind(IToolbarView view) {
+    this.view = view;
     ChangeListener<Boolean> listener = (observable, oldValue, newValue) -> {
       if (!newValue)
         return;
@@ -49,6 +52,10 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     view.getClusteringButton().setOnAction(event -> onClusterButtonSelection());
   }
 
+  public void chageToChartView() {
+    view.getChartsButton().setSelected(true);
+  }
+
   private void onFormButtonSelection() {
     OkCancelDialog dialog = new OkCancelDialog("Find Average Distance", StageStyle.UTILITY, Modality.APPLICATION_MODAL,
             true, 450, 400);
@@ -68,8 +75,13 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     clusterInfoController.bind(iClusterInfoView);
     dialog.setContent(iClusterInfoView.asNode());
     dialog.getOkButton().setOnAction(event -> {
-
-      dialog.close();
+      if (clusterInfoController.isValid()) {
+        dialog.close();
+        MainController.getInstance().applyClustering(clusterInfoController.getTabName(),
+                clusterInfoController.getClustersNumber(),
+                clusterInfoController.getFormula(),
+                clusterInfoController.getMask());
+      }
     });
     dialog.show();
   }

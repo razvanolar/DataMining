@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Cristi on 12/17/2016.
- */
 public abstract class Repository {
   private List<FormattedEntry> formattedEntries;
   private List<RawEntry> rawEntries;
@@ -53,8 +50,26 @@ public abstract class Repository {
           coordinates.add(entry.getCoordinates().get(i));
         }
       }
-      result.add(new ClusterEntry(coordinates));
+      result.add(new ClusterEntry(coordinates, new ArrayList<String>(entry.getValues())));
     }
+    return result;
+  }
+
+  public List<ClusterResultEntry> getClusterResultEntries(List<Cluster> clusters) {
+    if (clusters == null || clusters.isEmpty())
+      return new ArrayList<>();
+    List<ClusterResultEntry> result = new ArrayList<>();
+    for (int i = 0; i < clusters.size(); i ++)
+      result.addAll(convertClusterEntries(clusters.get(i).getClusterEntries(), i));
+    return result;
+  }
+
+  private List<ClusterResultEntry> convertClusterEntries(List<ClusterEntry> clusterEntries, int clusterIndex) {
+    if (clusterEntries == null || clusterEntries.isEmpty())
+      return new ArrayList<>();
+    List<ClusterResultEntry> result = new ArrayList<>(clusterEntries.size());
+    for (ClusterEntry entry : clusterEntries)
+      result.add(new ClusterResultEntry(clusterIndex, entry.getValues()));
     return result;
   }
 
