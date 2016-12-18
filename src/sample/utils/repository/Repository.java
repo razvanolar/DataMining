@@ -30,7 +30,6 @@ public abstract class Repository {
     }
     tree = new DecisionTree(formattedEntries);
     tree.run();
-    this.rules = tree.
   }
 
   public void reloadData() {
