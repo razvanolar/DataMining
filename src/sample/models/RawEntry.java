@@ -15,8 +15,5 @@ public class RawEntry extends Entry {
     }
     result = split[split.length - 1];
     resultValue = Float.parseFloat(result);
-
-    if (!POSSIBLE_RESULTS.contains(result))
-      POSSIBLE_RESULTS.add(result);
   }
 }

@@ -21,6 +21,7 @@ public class FileUtil extends Repository {
     public FileUtil(String entriesPath, String attributePath) {
         this.entriesPath = entriesPath;
         this.attributePath = attributePath;
+        loadData();
     }
 
     @Override

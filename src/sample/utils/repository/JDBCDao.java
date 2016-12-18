@@ -16,6 +16,7 @@ public class JDBCDao extends Repository {
 
     public JDBCDao() throws Exception {
         this.conn = JDBCUtil.getInstance().getConnection();
+        loadData();
     }
 
     public List<String> getAllValuesAsStringList() {

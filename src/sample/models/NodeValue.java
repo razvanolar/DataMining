@@ -63,7 +63,7 @@ public class NodeValue extends TreeNode {
   }
 
   @Override
-  public String getDisplayName() { //TODO replace value with "less than 'max' / between 'min' and 'max' / greater than 'min'"
+  public String getDisplayName() {
     return value;
   }
 

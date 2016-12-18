@@ -1,6 +1,7 @@
 package sample.utils.id3;
 
 import sample.models.*;
+import sample.utils.repository.FileUtil;
 import sample.utils.repository.JDBCDao;
 import sample.utils.repository.Repository;
 
@@ -17,20 +18,8 @@ public class DecisionTree {
   private List<TreeNode> path = new ArrayList<>();
   private Node root;
 
-  public DecisionTree(Repository repo) {
-    this.repo = repo;
-    loadData();
-  }
-
-  private void loadData() {
-    ID3Utils.namesMap = repo.getNamesMap();
-    ID3Utils.ATTR_NUMBER = ID3Utils.namesMap.size() - 1;
-    ID3Utils.attributeRangeMap = repo.getAttributeRange();
-    List<String> strings = repo.getAllValuesAsStringList();
-    entries = new ArrayList<>();
-    for (String string : strings) {
-      entries.add(new FormattedEntry(string));
-    }
+  public DecisionTree(List<FormattedEntry> entries) {
+    this.entries = entries;
   }
 
   public void run() {
@@ -111,8 +100,10 @@ public class DecisionTree {
       long time = System.currentTimeMillis();
 //      Repository repo = new FileUtil("D:\\Java Workspace\\DecisionTree\\src\\data\\entries.txt", "D:\\Java Workspace\\DecisionTree\\src\\data\\attribute_range.txt");
       Repository repo = new JDBCDao();
-
-      DecisionTree tree = new DecisionTree(repo);
+      System.out.println(System.currentTimeMillis() - time);
+      time = System.currentTimeMillis();
+      DecisionTree tree = new DecisionTree(repo.getFormattedEntries());
+      repo.setTree(tree);
       tree.run();
       System.out.println(System.currentTimeMillis() - time);
       time = System.currentTimeMillis();
