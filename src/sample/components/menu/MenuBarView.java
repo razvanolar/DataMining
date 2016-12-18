@@ -12,6 +12,7 @@ public class MenuBarView implements MenuBarController.IMenuBarView {
   private Menu editMenu;
   private Menu helpMenu;
   private MenuItem editAttributesRangeMenuItem;
+  private MenuItem editEntriesFilePathMenuItem;
 
   public MenuBarView() {
     initGUI();
@@ -22,12 +23,16 @@ public class MenuBarView implements MenuBarController.IMenuBarView {
     fileMenu = new Menu("File");
     editMenu = new Menu("Edit");
     helpMenu = new Menu("Help");
-
     editAttributesRangeMenuItem = new MenuItem("Attributes Range");
+    editEntriesFilePathMenuItem = new MenuItem("Entries Path");
 
-    editMenu.getItems().add(editAttributesRangeMenuItem);
+    editMenu.getItems().addAll(editAttributesRangeMenuItem, editEntriesFilePathMenuItem);
 
     menuBar = new MenuBar(fileMenu, editMenu, helpMenu);
+  }
+
+  public MenuItem getEditAttributesRangeMenuItem() {
+    return editAttributesRangeMenuItem;
   }
 
   @Override
