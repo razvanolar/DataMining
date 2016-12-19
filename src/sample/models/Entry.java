@@ -59,4 +59,13 @@ public abstract  class Entry {
   public Float getResultValue() {
     return resultValue;
   }
+
+  public static FormattedEntry fromRawToFormatted(RawEntry newValue) {
+    String valueArray = "";
+    for (int i=0; i<newValue.getValues().size(); i++) {
+      valueArray += newValue.getValues().get(i) + ",";
+    }
+    valueArray += newValue.getResultValue();
+    return new FormattedEntry(valueArray);
+  }
 }

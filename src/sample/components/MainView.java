@@ -5,6 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import sample.components.data_set_view.DataSetController;
 import sample.components.data_set_view.DataSetView;
 import sample.components.charts.ChartsController;
@@ -27,6 +29,8 @@ public class MainView implements View {
   private DataSetController.IDataSetView iDataSetView;
   private ChartsController.IChartsView iChartsView;
   private RuleController.IRuleView iRuleView;
+  private HBox footer;
+  private Text text;
 
   public MainView() {
     initGUI();
@@ -60,7 +64,10 @@ public class MainView implements View {
 
     mainContainer.setCenter(iDataSetView.asNode());
 
-    HBox footer = new HBox();
+    text = new Text();
+    text.setFill(Color.WHITE);
+    text.setFont(Font.font(15));
+    footer = new HBox(text);
     footer.setPrefSize(0, 20);
     footer.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
     mainContainer.setBottom(footer);
@@ -96,5 +103,9 @@ public class MainView implements View {
   @Override
   public Node asNode() {
     return stackPane;
+  }
+
+  public Text getText() {
+    return text;
   }
 }

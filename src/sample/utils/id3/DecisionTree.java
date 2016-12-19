@@ -138,4 +138,30 @@ public class DecisionTree {
     generateIfClauses(root);
     return printPathList;
   }
+
+  public String findPath(Entry value) {
+    TreeNode node = root;
+    boolean childFound = true;
+    String result = "if (";
+    while (node != null && node.getChildren() != null && childFound) {  // node = Node
+      childFound = false;
+      result += node.getDisplayName();
+      for (TreeNode child : node.getChildren()) { //child = NodeValue
+        if (value.getValues().get(node.getIndex()).equalsIgnoreCase(child.getDisplayName())) {
+          if (child.getChildren() != null) {
+            node = child.getChildren().get(0);  //node = Node
+            result += "==" + child.getDisplayName() + " AND ";
+            childFound = true;
+            break;
+          }
+          else {
+            result += "==" + child.getDisplayName();
+            result += ") -> " + child.getResult();
+            return result;
+          }
+        }
+      }
+    }
+    return "No available rule";
+  }
 }

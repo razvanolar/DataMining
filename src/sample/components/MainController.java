@@ -89,4 +89,8 @@ public class MainController {
       INSTANCE = new MainController();
     return INSTANCE;
   }
+
+  public MainView getMainView() {
+    return mainView;
+  }
 }
