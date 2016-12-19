@@ -1,0 +1,76 @@
+/* system components settings */
+/* ************************** */
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane:focused {
+    -fx-focus-color: transparent;
+}
+
+.tree-view {
+    -fx-background-color: transparent;
+}
+/* ************************** */
+
+.title_label_bg {
+    -fx-background-color: darkgray;
+}
+
+.scroll_pane_bg {
+    -fx-background-color: #e7e8e8;
+}
+
+.horizontal_separator_bar {
+    -fx-background-color: darkgray;
+}
+
+.projectLabelView {
+    -fx-background-color: darkgray;
+}
+
+.croppedTileView {
+    -fx-background-color: cornflowerblue;
+}
+
+.croppedTileView:hover {
+    -fx-background-color: rgba(181, 185, 188, 0.56);
+}
+
+.tabContentViewTilesPane {
+    -fx-background-color: #e7e8e8;
+}
+
+.croppedTilesPathView {
+    -fx-background-color: darkgray;
+}
+
+/* clean toolbar buttons */
+.clearButtonsContainer .button, .clearButtonsContainer .toggle-button {
+    -fx-background-color: transparent;
+}
+
+.clearButtonsContainer .button:hover, .clearButtonsContainer .toggle-button:hover {
+    -fx-background-color: darkgrey;
+}
+
+.clearButtonsContainer .button:armed {
+    -fx-background-color: darkcyan;
+}
+
+.clearButtonsContainer .toggle-button:selected {
+    -fx-background-color: lightgray;
+}
+
+/* footer */
+.footer {
+    -fx-background-color: lightgray;
+}
+
+.consoleToolbar .toggle-button:hover {
+    -fx-background-radius: 0;
+}
+
+.consoleToolbar .toggle-button:selected {
+    -fx-background-radius: 0;
+}

@@ -3,7 +3,6 @@ package sample.components.charts.clusters;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Region;
 import sample.models.Entry;
 import sample.utils.views.ViewsUtil;
 

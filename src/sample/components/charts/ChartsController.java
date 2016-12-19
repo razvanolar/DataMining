@@ -25,19 +25,11 @@ public class ChartsController implements Controller<ChartsController.IChartsView
   }
 
   public void addNewTab(String name, List<Cluster> clusters, List<ClusterResultEntry> resultEntries, boolean[] mask) {
-    ClustersController clustersController = new ClustersController(getDimensions(mask), resultEntries, clusters);
+    ClustersController clustersController = new ClustersController(mask, resultEntries, clusters);
     ClustersController.IClustersView iClustersView = new ClustersView();
     clustersController.bind(iClustersView);
     Tab tab = new Tab(name);
     tab.setContent(iClustersView.asNode());
     view.getTabPane().getTabs().add(tab);
-  }
-
-  private int getDimensions(boolean[] mask) {
-    int dimensions = 0;
-    for (boolean b : mask)
-      if (b)
-        dimensions ++;
-    return dimensions;
   }
 }

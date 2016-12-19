@@ -1,15 +1,15 @@
 package sample.components.toolbar;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import sample.utils.FillToolItem;
+import sample.utils.views.ToggleSwitch;
 
 public class ToolbarView implements ToolbarController.IToolbarView {
 
   private ToolBar toolBar;
+  private ToggleSwitch toggleSwitch;
+  private Button refreshDataButton;
   private Button formButton;
   private ToggleButton dataSetButton;
   private ToggleButton chartsButton;
@@ -22,13 +22,18 @@ public class ToolbarView implements ToolbarController.IToolbarView {
 
   @Override
   public void initGUI() {
+    toggleSwitch = new ToggleSwitch();
+    refreshDataButton = new Button("Refresh");
     formButton = new Button("Form");
     clusteringButton = new Button("Cluster");
     dataSetButton = new ToggleButton("Data Set");
     chartsButton = new ToggleButton("Charts");
     logButton = new ToggleButton("Rules");
     toolBar = new ToolBar(
+            toggleSwitch,
+            refreshDataButton,
             formButton,
+            new Separator(),
             clusteringButton,
             new FillToolItem(),
             dataSetButton,
@@ -39,6 +44,8 @@ public class ToolbarView implements ToolbarController.IToolbarView {
     ToggleGroup group = new ToggleGroup();
     group.getToggles().addAll(dataSetButton, chartsButton, logButton);
     dataSetButton.setSelected(true);
+
+    toolBar.getStyleClass().add("clearButtonsContainer");
   }
 
   public Button getFormButton() {
