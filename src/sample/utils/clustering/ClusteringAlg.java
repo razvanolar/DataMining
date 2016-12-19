@@ -2,6 +2,7 @@ package sample.utils.clustering;
 
 import sample.models.Cluster;
 import sample.models.ClusterEntry;
+import sample.utils.enums.Distances;
 import sample.utils.repository.FileRepository;
 import sample.utils.repository.Repository;
 
@@ -35,6 +36,7 @@ public class ClusteringAlg {
         return;
       }
       System.out.println("Run clustering...");
+      ClusteringUtils.distance = Distances.EUCLIDEAN.getDistance();
       List<Cluster> clusters = clusteringAlg.kmean(clusterEntries, clustersNumber, (float) 0.2);
       clusteringAlg.printClusters(clusters);
     } catch (Exception e) {
