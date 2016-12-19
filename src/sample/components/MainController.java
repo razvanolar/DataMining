@@ -19,8 +19,8 @@ import java.util.List;
 public class MainController {
 
   private static MainController INSTANCE;
-  public static String ENTRIES_PATH = "C:\\Users\\razvanolar\\Desktop\\DataMiningApp\\src\\sample\\utils\\data\\entries.txt";
-  public static String ATTRIBUTES_RANGE_PATH = "C:\\Users\\razvanolar\\Desktop\\DataMiningApp\\src\\sample\\utils\\data\\attribute_range.txt";
+  private static String ENTRIES_PATH = ".\\src\\sample\\utils\\data\\entries.txt";
+  private static String ATTRIBUTES_RANGE_PATH = ".\\src\\sample\\utils\\data\\attribute_range.txt";
 
   private MainView mainView;
   private DataSetController dataSetController;
@@ -63,7 +63,7 @@ public class MainController {
       try {
         ClusteringAlg clusteringAlg = new ClusteringAlg();
         List<Cluster> clusters = clusteringAlg.kmean(repo.getPartialRawEntries(mask), clustersNumber, (float) 0.3);
-        toolbarController.chageToChartView();
+        toolbarController.changeToChartView();
         chartsController.addNewTab(tabName, clusters, repo.getClusterResultEntries(clusters), mask);
       } catch (Exception e) {
         e.printStackTrace();

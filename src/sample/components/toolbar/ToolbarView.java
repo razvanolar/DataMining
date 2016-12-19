@@ -48,6 +48,14 @@ public class ToolbarView implements ToolbarController.IToolbarView {
     toolBar.getStyleClass().add("clearButtonsContainer");
   }
 
+  public ToggleSwitch getToggleSwitch() {
+    return toggleSwitch;
+  }
+
+  public Button getRefreshDataButton() {
+    return refreshDataButton;
+  }
+
   public Button getFormButton() {
     return formButton;
   }

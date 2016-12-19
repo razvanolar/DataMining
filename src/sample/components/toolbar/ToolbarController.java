@@ -11,14 +11,18 @@ import sample.components.cluster_info_view.ClusterInfoController;
 import sample.components.cluster_info_view.ClusterInfoView;
 import sample.components.form.FormController;
 import sample.components.form.FormView;
+import sample.utils.enums.RepositoryTypes;
 import sample.utils.interfaces.Controller;
 import sample.utils.interfaces.View;
 import sample.utils.enums.MainContentTypes;
 import sample.utils.views.OkCancelDialog;
+import sample.utils.views.ToggleSwitch;
 
 public class ToolbarController implements Controller<ToolbarController.IToolbarView> {
 
   public interface IToolbarView extends View {
+    ToggleSwitch getToggleSwitch();
+    Button getRefreshDataButton();
     Button getFormButton();
     Button getClusteringButton();
     ToggleButton getChartsButton();
@@ -47,13 +51,31 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     view.getChartsButton().selectedProperty().addListener(listener);
     view.getLogButton().selectedProperty().addListener(listener);
 
+    view.getToggleSwitch().switchOnProperty().addListener((observable, oldValue, newValue) -> changeRepository(newValue));
+    view.getRefreshDataButton().setOnAction(event -> onRefreshSelection());
     view.getFormButton().setOnAction(event -> onFormButtonSelection());
-
     view.getClusteringButton().setOnAction(event -> onClusterButtonSelection());
   }
 
-  public void chageToChartView() {
+  public void changeToChartView() {
     view.getChartsButton().setSelected(true);
+  }
+
+  /**
+   * Change the used repository
+   * @param value - true to use FileRepository
+   *              - false to use JDBCRepository
+   */
+  private void changeRepository(boolean value) {
+    if (value) {
+      MainController.getInstance().load(RepositoryTypes.FILE);
+    } else
+      MainController.getInstance().load(RepositoryTypes.DATABASE);
+
+  }
+
+  private void onRefreshSelection() {
+    changeRepository(view.getToggleSwitch().switchOnProperty().getValue());
   }
 
   private void onFormButtonSelection() {

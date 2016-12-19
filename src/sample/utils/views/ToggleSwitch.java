@@ -52,8 +52,7 @@ public class ToggleSwitch extends HBox {
         label.setText("FS");
         setStyle("-fx-background-color: rgba(20, 58, 188, 0.56);");
         label.toFront();
-      }
-      else {
+      } else {
         label.setText("DB");
         setStyle("-fx-background-color: green;");
         button.toFront();
