@@ -1,6 +1,7 @@
 package sample.utils.clustering;
 
 import sample.models.ClusterEntry;
+import sample.models.distanceModels.Distance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +13,7 @@ import java.util.Random;
 public class ClusteringUtils {
 
   private static Random rand = new Random();
-
-  public static float getDistance(ClusterEntry a, ClusterEntry b) {
-    float total = 0;
-    float diff;
-    List<Float> aCoordinates = a.getCoordinates();
-    List<Float> bCoordinates = b.getCoordinates();
-    for (int i = 0; i < aCoordinates.size(); i ++) {
-      diff = bCoordinates.get(i) - aCoordinates.get(i);
-      total += diff * diff;
-    }
-    return (float) Math.sqrt(total);
-  }
+  public static Distance distance;
 
   public static List<ClusterEntry> getRandomPointsList(List<ClusterEntry> rawEntries, int number) {
     List<ClusterEntry> newRawEntries = new ArrayList<>(rawEntries);

@@ -22,7 +22,7 @@ public class Cluster {
     this.rawEntries = rawEntries;
     ClusterEntry oldCentroid = centroid;
     this.centroid = calculateCentroid();
-    return ClusteringUtils.getDistance(oldCentroid, this.centroid);
+    return ClusteringUtils.distance.getDistance(oldCentroid, this.centroid);
   }
 
   private ClusterEntry calculateCentroid() {

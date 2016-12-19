@@ -46,10 +46,10 @@ public class ClusteringAlg {
       loopCounter ++;
 
       for (ClusterEntry p : rawEntries) {
-        float smallestDistance = ClusteringUtils.getDistance(p, clusters.get(0).getCentroid());
+        float smallestDistance = ClusteringUtils.distance.getDistance(p, clusters.get(0).getCentroid());
         int clusterIndex = 0;
         for (int i = 0; i < clusterCount - 1; i ++) {
-          float distance = ClusteringUtils.getDistance(p, clusters.get(i + 1).getCentroid());
+          float distance = ClusteringUtils.distance.getDistance(p, clusters.get(i + 1).getCentroid());
           if (distance < smallestDistance) {
             smallestDistance = distance;
             clusterIndex = i + 1;

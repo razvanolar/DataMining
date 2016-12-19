@@ -7,6 +7,7 @@ import sample.components.logs_view.RuleController;
 import sample.components.toolbar.ToolbarController;
 import sample.models.Cluster;
 import sample.utils.clustering.ClusteringAlg;
+import sample.utils.clustering.ClusteringUtils;
 import sample.utils.enums.Distances;
 import sample.utils.enums.MainContentTypes;
 import sample.utils.enums.RepositoryTypes;
@@ -62,6 +63,7 @@ public class MainController {
     mainView.mask("Loading...");
     Platform.runLater(() -> {
       try {
+        ClusteringUtils.distance = distanceFormula.getDistance();
         ClusteringAlg clusteringAlg = new ClusteringAlg();
         List<Cluster> clusters = clusteringAlg.kmean(repo.getPartialRawEntries(mask), clustersNumber, (float) 0.3);
         toolbarController.changeToChartView();
