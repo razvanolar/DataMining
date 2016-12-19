@@ -117,4 +117,8 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
   public boolean isRawEntriesFormat() {
     return view.getRawEntriesToggleButton().isSelected();
   }
+
+  public RepositoryTypes getRepositoryType() {
+    return view.getToggleSwitch().switchOnProperty().getValue() ? RepositoryTypes.FILE : RepositoryTypes.DATABASE;
+  }
 }

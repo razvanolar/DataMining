@@ -19,7 +19,8 @@ import java.util.List;
 public class MainController {
 
   private static MainController INSTANCE;
-  private static String ENTRIES_PATH = ".\\src\\sample\\utils\\data\\entries.txt";
+  private static String ENTRIES_RELATIVE_PATH = ".\\src\\sample\\utils\\data\\entries.txt";
+  private static String ENTRIES_PATH = ENTRIES_RELATIVE_PATH;
   private static String ATTRIBUTES_RANGE_PATH = ".\\src\\sample\\utils\\data\\attribute_range.txt";
 
   private MainView mainView;
@@ -42,7 +43,7 @@ public class MainController {
   }
 
   public void load() {
-    load(RepositoryTypes.DATABASE);
+    load(toolbarController.getRepositoryType());
   }
 
   public void load(RepositoryTypes repositoryTypes) {
@@ -80,8 +81,19 @@ public class MainController {
     }
   }
 
+  public void setEntriesPath(String path) {
+    ENTRIES_PATH = path == null || path.isEmpty() ? ENTRIES_RELATIVE_PATH : path;
+    load();
+  }
+
   public Repository getRepo() {
     return repo;
+  }
+
+  public String getEntriesPath() {
+    if (ENTRIES_PATH.equalsIgnoreCase(ENTRIES_RELATIVE_PATH))
+      return null;
+    return ENTRIES_PATH;
   }
 
   public static MainController getInstance() {

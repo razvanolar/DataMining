@@ -35,6 +35,10 @@ public class MenuBarView implements MenuBarController.IMenuBarView {
     return editAttributesRangeMenuItem;
   }
 
+  public MenuItem getEditEntriesFilePathMenuItem() {
+    return editEntriesFilePathMenuItem;
+  }
+
   @Override
   public Node asNode() {
     return menuBar;
