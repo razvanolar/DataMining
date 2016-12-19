@@ -49,7 +49,7 @@ public class MainController {
     mainView.mask("Loading...");
     try {
       repo = repositoryTypes == RepositoryTypes.DATABASE ? new JDBCRepository() : new FileRepository(ENTRIES_PATH, ATTRIBUTES_RANGE_PATH);
-      dataSetController.load();
+      dataSetController.load(toolbarController.isRawEntriesFormat());
       ruleController.load();
     } catch (Exception e) {
       e.printStackTrace();
@@ -70,6 +70,14 @@ public class MainController {
       }
       mainView.unmask();
     });
+  }
+
+  public void changeEntriesFormat(boolean isRawFormat) {
+    try {
+      dataSetController.load(isRawFormat);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public Repository getRepo() {

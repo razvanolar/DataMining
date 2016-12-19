@@ -24,6 +24,7 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     ToggleSwitch getToggleSwitch();
     Button getRefreshDataButton();
     Button getFormButton();
+    ToggleButton getRawEntriesToggleButton();
     Button getClusteringButton();
     ToggleButton getChartsButton();
     ToggleButton getDataSetButton();
@@ -54,6 +55,7 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     view.getToggleSwitch().switchOnProperty().addListener((observable, oldValue, newValue) -> changeRepository(newValue));
     view.getRefreshDataButton().setOnAction(event -> onRefreshSelection());
     view.getFormButton().setOnAction(event -> onFormButtonSelection());
+    view.getRawEntriesToggleButton().selectedProperty().addListener((observable, oldValue, newValue) -> onEntriesFormatChanged(newValue));
     view.getClusteringButton().setOnAction(event -> onClusterButtonSelection());
   }
 
@@ -89,6 +91,10 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
     dialog.show();
   }
 
+  private void onEntriesFormatChanged(boolean isRawFormat) {
+    MainController.getInstance().changeEntriesFormat(isRawFormat);
+  }
+
   private void onClusterButtonSelection() {
     OkCancelDialog dialog = new OkCancelDialog("Clustering Data", StageStyle.UTILITY, Modality.APPLICATION_MODAL,
             true, true);
@@ -106,5 +112,9 @@ public class ToolbarController implements Controller<ToolbarController.IToolbarV
       }
     });
     dialog.show();
+  }
+
+  public boolean isRawEntriesFormat() {
+    return view.getRawEntriesToggleButton().isSelected();
   }
 }

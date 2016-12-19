@@ -6,6 +6,8 @@ import sample.models.Entry;
 import sample.utils.interfaces.Controller;
 import sample.utils.interfaces.View;
 
+import java.util.List;
+
 public class DataSetController implements Controller<DataSetController.IDataSetView> {
 
   public interface IDataSetView extends View {
@@ -19,8 +21,11 @@ public class DataSetController implements Controller<DataSetController.IDataSetV
     this.view = view;
   }
 
-  public void load() {
+  public void load(boolean isRawFormat) {
     view.getEntryTableView().getItems().clear();
-    view.getEntryTableView().getItems().addAll(MainController.getInstance().getRepo().getRawEntries());
+    if (isRawFormat)
+      view.getEntryTableView().getItems().addAll(MainController.getInstance().getRepo().getRawEntries());
+    else
+      view.getEntryTableView().getItems().addAll(MainController.getInstance().getRepo().getFormattedEntries());
   }
 }

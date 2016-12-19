@@ -11,6 +11,8 @@ public class ToolbarView implements ToolbarController.IToolbarView {
   private ToggleSwitch toggleSwitch;
   private Button refreshDataButton;
   private Button formButton;
+  private ToggleButton rawEntriesToggleButton;
+  private ToggleButton formattedEntriesToggleButton;
   private ToggleButton dataSetButton;
   private ToggleButton chartsButton;
   private ToggleButton logButton;
@@ -25,6 +27,8 @@ public class ToolbarView implements ToolbarController.IToolbarView {
     toggleSwitch = new ToggleSwitch();
     refreshDataButton = new Button("Refresh");
     formButton = new Button("Form");
+    rawEntriesToggleButton = new ToggleButton("Raw");
+    formattedEntriesToggleButton = new ToggleButton("Formatted");
     clusteringButton = new Button("Cluster");
     dataSetButton = new ToggleButton("Data Set");
     chartsButton = new ToggleButton("Charts");
@@ -33,6 +37,9 @@ public class ToolbarView implements ToolbarController.IToolbarView {
             toggleSwitch,
             refreshDataButton,
             formButton,
+            new Separator(),
+            rawEntriesToggleButton,
+            formattedEntriesToggleButton,
             new Separator(),
             clusteringButton,
             new FillToolItem(),
@@ -43,7 +50,10 @@ public class ToolbarView implements ToolbarController.IToolbarView {
 
     ToggleGroup group = new ToggleGroup();
     group.getToggles().addAll(dataSetButton, chartsButton, logButton);
+    ToggleGroup entriesGroup = new ToggleGroup();
+    entriesGroup.getToggles().addAll(rawEntriesToggleButton, formattedEntriesToggleButton);
     dataSetButton.setSelected(true);
+    rawEntriesToggleButton.setSelected(true);
 
     toolBar.getStyleClass().add("clearButtonsContainer");
   }
@@ -58,6 +68,10 @@ public class ToolbarView implements ToolbarController.IToolbarView {
 
   public Button getFormButton() {
     return formButton;
+  }
+
+  public ToggleButton getRawEntriesToggleButton() {
+    return rawEntriesToggleButton;
   }
 
   public Button getClusteringButton() {
