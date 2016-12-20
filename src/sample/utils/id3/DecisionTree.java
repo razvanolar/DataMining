@@ -1,9 +1,11 @@
 package sample.utils.id3;
 
 import sample.models.*;
+import sample.utils.repository.FileRepository;
 import sample.utils.repository.JDBCRepository;
 import sample.utils.repository.Repository;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -91,25 +93,56 @@ public class DecisionTree {
   public Node getRoot() {
     return root;
   }
+//
+//  public static void main(String[] args) {
+//    try {
+//      long time = System.currentTimeMillis();
+////      Repository repo = new FileRepository("D:\\Java Workspace\\DecisionTree\\src\\data\\entries.txt", "D:\\Java Workspace\\DecisionTree\\src\\data\\attribute_range.txt");
+//      Repository repo = new JDBCRepository();
+//      System.out.println(System.currentTimeMillis() - time);
+//      time = System.currentTimeMillis();
+//      DecisionTree tree = new DecisionTree(repo.getFormattedEntries());
+//      repo.setTree(tree);
+//      tree.run();
+//      System.out.println(System.currentTimeMillis() - time);
+//      time = System.currentTimeMillis();
+//      tree.generateIfClauses(tree.getRoot());
+//      System.out.println(System.currentTimeMillis() - time);
+//      System.out.println("Result: " + tree.find(new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
+//  }
 
   public static void main(String[] args) {
-    try {
-      long time = System.currentTimeMillis();
-//      Repository repo = new FileRepository("D:\\Java Workspace\\DecisionTree\\src\\data\\entries.txt", "D:\\Java Workspace\\DecisionTree\\src\\data\\attribute_range.txt");
-      Repository repo = new JDBCRepository();
-      System.out.println(System.currentTimeMillis() - time);
-      time = System.currentTimeMillis();
-      DecisionTree tree = new DecisionTree(repo.getFormattedEntries());
-      repo.setTree(tree);
-      tree.run();
-      System.out.println(System.currentTimeMillis() - time);
-      time = System.currentTimeMillis();
-      tree.generateIfClauses(tree.getRoot());
-      System.out.println(System.currentTimeMillis() - time);
-      System.out.println("Result: " + tree.find(new FormattedEntry("24,1.75,80.7,1,4,5,13.5,0")));
-    } catch (Exception e) {
-      e.printStackTrace();
+    System.out.println("Validating arguments");
+    if (args == null || args.length != 2) {
+      System.out.println("Incorrect provided parameters.");
+      return;
     }
+    try {
+      File file = new File(args[0]);
+      if (!file.exists()) {
+        System.out.println("Specified entries file does not exists.");
+        return;
+      }
+      file = new File(args[1]);
+      if (!file.exists()) {
+        System.out.println("Specified attribute range file does not exist");
+        return;
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      System.out.println("arg0 entries file");
+      System.out.println("arg0 attribute range file");
+      return;
+    }
+    Repository repo = new FileRepository(args[0], args[1]);
+    DecisionTree tree = new DecisionTree(repo.getFormattedEntries());
+    repo.setTree(tree);
+    tree.run();
+    tree.generateIfClauses(tree.getRoot());
+    System.out.println(tree.getPrintPathList());
   }
 
   public Float find(FormattedEntry formattedEntry) {
